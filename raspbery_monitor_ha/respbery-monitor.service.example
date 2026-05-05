@@ -1,0 +1,19 @@
+[Unit]
+Description=Raspberry Pi Monitor for Home Assistant
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=your_username
+Group=your_username
+WorkingDirectory=/home/your_username/projects/raspbery-monitor-ha/raspbery_monitor_ha
+Environment="PATH=/home/denis/.local/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/your_username/.local/bin/poetry run python3 ./src/raspbery_monitor_ha/main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

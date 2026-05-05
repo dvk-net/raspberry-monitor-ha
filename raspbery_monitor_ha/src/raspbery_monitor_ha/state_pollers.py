@@ -1,17 +1,29 @@
-import psutil
-from loguru import logger
-import time
-from dotenv import load_dotenv
 import os
+import psutil
+import subprocess
+import time
+from loguru import logger
+from datetime import timedelta
+from dotenv import load_dotenv
 load_dotenv()
 
 counter_before_down = 0
 counter_before_up = 0
 prev_time_up = time.time()
 prev_time_down = time.time()
-def get_uptime():
+
+def get_uptime_seconds():
     with open("/proc/uptime") as f:
-        return int(float(f.readline().split()[0]))
+        total_seconds = int(float(f.readline().split()[0]))
+        uptime = timedelta(seconds=total_seconds)
+        
+        # timedelta предоставляет дни и общие секунды
+        days = uptime.days
+        hours = total_seconds // 3600 % 24
+        minutes = total_seconds // 60 % 60
+        seconds = total_seconds % 60
+        
+        return f"{days}d {hours}h {minutes}m {seconds}s" if days > 0 else f"{hours}h {minutes}m {seconds}s"
 
 def get_cpu_usage():
     return psutil.cpu_percent(interval=1)
@@ -73,3 +85,34 @@ def get_wifi_upload_speed():
 
 def get_cpu_load():
     return psutil.cpu_percent()
+
+def get_memory_available():
+    return round(psutil.virtual_memory().available / (1024**3), 1)  # GB
+
+def get_disk_usage(path="/"):
+    return psutil.disk_usage(path).percent
+
+def get_core_voltage():
+    try:
+        result = subprocess.run(
+            ['vcgencmd', 'measure_volts', 'core'],
+            capture_output=True, text=True
+        )
+        volt = result.stdout.split('=')[1].replace('V', '').strip()
+        return float(volt)
+    except:
+        return None
+
+def get_cpu_frequency():
+    return round(psutil.cpu_freq().current, 0)
+
+def get_gpu_frequency():
+    try:
+        result = subprocess.run(
+            ['vcgencmd', 'measure_clock', 'core'],
+            capture_output=True, text=True
+        )
+        freq = result.stdout.split('=')[1].strip()
+        return round(int(freq) / 1_000_000, 0)  # MHz
+    except:
+        return None
