@@ -88,7 +88,9 @@ class WiFiUploadSpeedSensor(Sensor):
 class CPULoadSensor(Sensor):
     def get_state(self):
         return state_pollers.get_cpu_load()
-
+class RP1TemperatureSensor(Sensor):
+    def get_state(self):
+        return state_pollers.get_rp1_adc_temperature()
 configured_sensors = [
     UptimeSensor(
         name="Uptime",
@@ -98,6 +100,12 @@ configured_sensors = [
     ),
     CPUTemperatureSensor(
         name="CPU_Temperature",
+        device=device,
+        unit_of_measurement="°C",
+        device_class="temperature"
+    ),
+    RP1TemperatureSensor(
+        name="RP1_Temperature",
         device=device,
         unit_of_measurement="°C",
         device_class="temperature"

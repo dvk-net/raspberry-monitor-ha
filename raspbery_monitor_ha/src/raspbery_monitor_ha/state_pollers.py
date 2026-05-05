@@ -22,13 +22,21 @@ def get_memory_usage():
 
 def get_cpu_temperature():
     temps = psutil.sensors_temperatures()
-    if "cpu-thermal" in temps:
-        return temps["cpu-thermal"][0].current
+    if temps.get('cpu_thermal', None):
+        return temps['cpu_thermal'][0].current
     elif "coretemp" in temps:
         return temps["coretemp"][0].current
     else:
+        logger.info("No temp match")
         return None
-    
+
+def get_rp1_adc_temperature():
+    temps = psutil.sensors_temperatures()
+    if temps.get("rp1_adc", None):
+        return temps["rp1_adc"][0].current
+    else:
+        return None
+
 def get_wifi_download_speed():
     global counter_before_down, prev_time_down
     elapsed = time.time() - prev_time_down
