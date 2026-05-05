@@ -24,5 +24,4 @@ requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-# If your package provides CLI commands
-pi_monitor_start = "raspbery_monitor_ha.main:main"
+pi_monitor_start = "raspbery_monitor_ha.main"
