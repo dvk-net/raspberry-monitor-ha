@@ -32,10 +32,16 @@ def on_connect(client, userdata, flags, rc):
     logger.info("Connected to MQTT broker, declaring availability")
     client.publish(device.availability_topic, "online", retain=True)
     for sensor in configured_sensors:
-        sensor.publish_config(client)
+        if os.getenv(f"SENSOR_{sensor.name}", "true").lower() == "false":
+            sensor.delete_from_ha(client)
+        else:
+            sensor.publish_config(client)
     for button in configured_buttons:
-        button.publish_config(client)
-        button.setup_callback(client, button.callback)
+        if os.getenv(f"BUTTON_{button.name}", "true").lower() == "false":
+            button.delete_from_ha(client)
+        else:
+            button.publish_config(client)
+            button.setup_callback(client, button.callback)
 
 mqtt_client.on_message = on_message
 mqtt_client.on_connect = on_connect
@@ -46,5 +52,6 @@ mqtt_client.loop_start()
 
 while True:
     for sensor in configured_sensors:
-        sensor.publish_state(mqtt_client)
+        if os.getenv(f"SENSOR_{sensor.name}", "true").lower() == "true":
+            sensor.publish_state(mqtt_client)
     time.sleep(int(os.getenv("POLLING_INTERVAL", 60)))

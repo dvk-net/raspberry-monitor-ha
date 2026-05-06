@@ -76,6 +76,13 @@ configured_sensors = [
         icon="mdi:chip",
         get_state_func=state_pollers.get_gpu_frequency
     ),
+    base_classes.create_sensor(
+        name="Session_Count",
+        unit_of_measurement=None,
+        device_class=None,
+        icon="mdi:account-group",
+        get_state_func=state_pollers.get_session_count_who
+    ),
 ]
 
 

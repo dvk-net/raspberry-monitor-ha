@@ -116,3 +116,17 @@ def get_gpu_frequency():
         return round(int(freq) / 1_000_000, 0)  # MHz
     except:
         return None
+    
+def get_session_count_who():
+    """Get the number of active sessions using the 'who' command."""
+    try:
+        result = subprocess.run(
+            ['who'],
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        sessions = result.stdout.split('\n')[:-1]  # Exclude the trailing newline
+        return len(sessions)
+    except Exception as e:
+        return 0

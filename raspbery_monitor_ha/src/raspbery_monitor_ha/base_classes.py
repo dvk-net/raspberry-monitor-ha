@@ -54,6 +54,10 @@ class Sensor:
         mqtt_client.publish(self.device.availability_topic, "online", retain=True)
         logger.info(f"published config {self.name}")
         logger.info(f"config payload: {config_payload}")
+    def delete_from_ha(self, mqtt_client):
+        mqtt_client.publish(self.config_topic, "", retain=True)
+        mqtt_client.publish(self.state_topic, "", retain=True)
+        logger.info(f"Deleted {self.name} from HA")
 
 class Button:
     
@@ -99,6 +103,11 @@ class Button:
         mqtt_client.message_callback_add(self.command_topic, on_message)
         mqtt_client.subscribe(self.command_topic)
         logger.info(f"Subscribed to {self.command_topic}")
+
+    def delete_from_ha(self, mqtt_client):
+        mqtt_client.publish(self.config_topic, "", retain=True)
+        mqtt_client.publish(self.command_topic, "", retain=True)
+        logger.info(f"Deleted button {self.name} from HA")
 
     def callback(self):
         pass
