@@ -25,8 +25,8 @@ This project provides a way to monitor your Raspberry Pi's system metrics such a
 
 1. Clone the repository:
    ```
-   git clone https://github.com/dvk-net/raspbery-monitor-ha.git
-   cd raspbery-monitor-ha
+   git clone https://github.com/dvk-net/raspberry-monitor-ha.git
+   cd raspberry-monitor-ha
    ```
 
 
@@ -44,14 +44,14 @@ This project provides a way to monitor your Raspberry Pi's system metrics such a
 4. Install as a Linux service:
 
    ```
-   cp cp raspbery_monitor_ha.service.example raspbery_monitor_ha.service
-   # adjust raspbery_monitor_ha.service to your environment
-   sudo cp raspbery_monitor_ha.service /etc/systemd/system/
+   cp cp raspberry_monitor_ha.service.example raspberry_monitor_ha.service
+   # adjust raspberry_monitor_ha.service to your environment
+   sudo cp raspberry_monitor_ha.service /etc/systemd/system/
    sudo systemctl daemon-reload
-   sudo systemctl enable raspbery_monitor_ha
-   sudo systemctl start raspbery_monitor_ha
+   sudo systemctl enable raspberry_monitor_ha
+   sudo systemctl start raspberry_monitor_ha
    ```
 
 ## Usage
 
-After installation, the monitor will start collecting data and sending it to Home Assistant. Check the Home Assistant devices for the new discovered device.
+After installation, the monitor will start collecting data and sending it to Home Assistant. Check the Home Assistant devices for the newly discovered device.
