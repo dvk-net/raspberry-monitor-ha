@@ -1,4 +1,4 @@
-from raspbery_monitor_ha import base_classes, callbacks
+from raspberry_monitor_ha import base_classes, callbacks
 
 configured_buttons = [
     base_classes.create_button(

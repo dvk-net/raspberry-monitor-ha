@@ -1,5 +1,5 @@
 [project]
-name = "raspbery-monitor-ha"
+name = "raspberry-monitor-ha"
 version = "0.1.0"
 description = ""
 authors = [
@@ -17,11 +17,11 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "raspbery_monitor_ha", from = "src"}]
+packages = [{include = "raspberry_monitor_ha", from = "src"}]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-pi_monitor_start = "raspbery_monitor_ha.main"
+pi_monitor_start = "raspberry_monitor_ha.main"
