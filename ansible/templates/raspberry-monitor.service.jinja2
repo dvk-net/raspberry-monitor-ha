@@ -1,0 +1,19 @@
+[Unit]
+Description={{ SERVICE_CTL_DESCRIPTION }}
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User={{ service_user }}
+Group={{ service_user }}
+WorkingDirectory={{ install_path }}/raspberry_monitor_ha
+Environment="PATH=/home/{{ service_user }}/.local/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart={{ poetry_path }} run python3 ./src/raspberry_monitor_ha/main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

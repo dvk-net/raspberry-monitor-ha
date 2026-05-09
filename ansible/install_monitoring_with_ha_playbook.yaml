@@ -1,0 +1,71 @@
+- name: Configure mediaservers
+  hosts: ra_servers
+  vars_files:
+    - vars/monitoring-vars.yaml # Needs to be created by the user with the required variables (e.g., repository URL, branch, installation path, service user)
+    - vars/secrets.yaml         # Needs to be created by the user with the required secrets (e.g., API keys, passwords)
+  handlers:
+    - import_tasks: handlers/main.yaml
+  become: true
+  tasks:
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install git and basic dependencies
+      apt:
+        name:
+          - git
+          - curl
+          - python3
+          - python3-pip
+          - python3-venv
+          - build-essential
+        state: present
+    
+    - name: Install Poetry for user '{{ service_user }}'
+      shell: |
+        curl -sSL https://install.python-poetry.org | python3 -
+      become_user: "{{ service_user }}"
+    
+    - name: Add Poetry to system PATH for the session
+      set_fact:
+        poetry_path: "/home/{{ service_user }}/.local/bin/poetry"
+    
+    - name: Clone/Update repository
+      git:
+        repo: "{{ monitor_tool_repo_url }}"
+        dest: "{{ install_path }}"
+        version: "{{ monitor_tool_repo_branch }}"
+        force: yes
+      become_user: "{{ service_user }}"
+
+    - name: Install Python dependencies with Poetry
+      command: "{{ poetry_path }} install"
+      args:
+        chdir: "{{ install_path }}/raspberry_monitor_ha"
+      become_user: "{{ service_user }}"
+
+    - name: Create .env file from template
+      ansible.builtin.template:
+        src: "templates/env-template.jinja2"
+        dest: "{{ install_path }}/raspberry_monitor_ha/.env"
+        owner: "{{ service_user }}"
+        group: "{{ service_user }}"
+        mode: 0600
+      ignore_errors: yes
+
+    - name: Deploy systemd service file
+      ansible.builtin.template:
+        src: "templates/raspberry-monitor.service.jinja2"
+        dest: "/etc/systemd/system/{{ SERVICE_CTL_NAME }}.service"
+        mode: 0644
+      notify: restart and enable service
+    
+    # - name: restart and enable service
+    #   systemd:
+    #     name: "{{ SERVICE_CTL_NAME }}"
+    #     state: restarted
+    #     enabled: yes
+    #     daemon_reload: yes

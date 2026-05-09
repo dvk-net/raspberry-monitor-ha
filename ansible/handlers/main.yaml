@@ -1,0 +1,7 @@
+---
+- name: restart and enable service
+  systemd:
+    name: "{{ SERVICE_CTL_NAME }}"
+    state: restarted
+    enabled: yes
+    daemon_reload: yes

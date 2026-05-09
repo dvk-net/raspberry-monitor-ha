@@ -1,0 +1,19 @@
+monitor_tool_repo_url: "git@github.com:dvk-net/raspberry-monitor-ha.git"
+monitor_tool_repo_branch: "master"
+install_path: "/home/your_username/raspberry-monitor-ha"            # Update this to the desired installation path
+service_user: "your_username"                                       # Update this to the user that should run the service (e.g., "dennis")
+MQTT_HOST: 192.168.1.123                                            # Update this to your MQTT broker's IP address
+MQTT_PORT: 1883                                                     # Update this if your MQTT broker uses a different port
+DEVICE_NAME: "Media Server"                                         # Update this to the desired device name
+DEVICE_ID: "Raspberry_Pi_5_media_server"                            # Update this to a unique device ID
+DEVICE_MANUFACTURER: "DIY Project"                                  # Update this to the device manufacturer
+DEVICE_MODEL: "Raspberry Pi 5"                                      # Update this to the device model
+SERVICE_NAME: "raspberry_monitor_ha"                                # Update this to the desired service name (used in Home Assistant)
+NETWORK_INTERFACE: "wlan0"                                          # Update this to the network interface you want to monitor (e.g., "eth0" for Ethernet)
+
+DEACTIVATED_SENSORS: []                                             # Add sensor names to this list to deactivate them
+DEACTIVATED_BUTTONS: []                                             # Add button names to this list to deactivate them
+
+# Service configuration
+SERVICE_CTL_NAME: "raspberry_monitor_ha"                            # Update this to the desired systemd service name (e.g., "raspberry_monitor_ha")
+SERVICE_CTL_DESCRIPTION: "Raspberry Pi Monitor for Home Assistant"  # Update this to a description for the systemd service

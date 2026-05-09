@@ -1,0 +1,40 @@
+# MQTT Broker Configuration
+MQTT_HOST={{ MQTT_HOST }}
+MQTT_PORT={{ MQTT_PORT }}
+MQTT_USERNAME={{ MQTT_USERNAME }}
+MQTT_PASSWORD={{ MQTT_PASSWORD }}
+MQTT_TLS_ENABLED=false
+TOPIC_PREFIX=hmd
+
+# Device Configuration
+DEVICE_NAME={{ DEVICE_NAME }}
+DEVICE_ID={{ DEVICE_ID }}
+DEVICE_MANUFACTURER={{ DEVICE_MANUFACTURER }}
+DEVICE_MODEL={{ DEVICE_MODEL }}
+
+# APP Configuration
+LOG_LEVEL=INFO
+POLLING_INTERVAL=60
+
+# Service Configuration
+SERVICE_NAME={{ SERVICE_NAME }}
+
+# Network Configuration
+NETWORK_INTERFACE={{ NETWORK_INTERFACE }}
+
+# Sensor activation
+# All sensors are enabled by default. To disable a sensor, set its value to false.
+# Key must be SENSOR_<sensor_name> where <sensor_name> is the sensor name defined in sensors.py
+# SENSOR_Session_Count=false
+{% for sensor in DEACTIVATED_SENSORS %}
+SENSOR_{{ sensor }}=false
+{% endfor %}
+
+# Button activation
+# All buttons are enabled by default. To disable a button, set its value to false.
+# Key must be BUTTON_<button_name> where <button_name> is the button name defined in buttons.py
+
+# BUTTON_Restart_RP_monitoring=false
+{% for button in DEACTIVATED_BUTTONS %}
+BUTTON_{{ button }}=false
+{% endfor %}

@@ -21,6 +21,10 @@ This project provides a way to monitor your Raspberry Pi's system metrics such a
 
 ## Installation
 
+### Ansible Playbook
+1. Use the Ansible playbook in the `ansible` directory to automate the installation and configuration of the monitoring tool on your Raspberry Pi. Follow the instructions in the `ansible/README.md` file for detailed steps on how to set up and run the playbook.
+
+### Manual Installation
 1. Install poetry
 
 1. Clone the repository:
