@@ -17,7 +17,7 @@ This project provides a way to monitor your Raspberry Pi's system metrics such a
 
 ## Tested on
 
-   - Raspberry Pi 5 (Respberry OS 64)
+   - Raspberry Pi 5 (Raspberry OS 64)
 
 ## Installation
 
