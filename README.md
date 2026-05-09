@@ -44,12 +44,12 @@ This project provides a way to monitor your Raspberry Pi's system metrics such a
 4. Install as a Linux service:
 
    ```
-   cp cp raspberry_monitor_ha.service.example raspberry_monitor_ha.service
-   # adjust raspberry_monitor_ha.service to your environment
-   sudo cp raspberry_monitor_ha.service /etc/systemd/system/
+   cp raspberry-monitor.service.example raspberry-monitor-ha.service
+   # adjust raspberry-monitor-ha.service to your environment
+   sudo cp raspberry-monitor-ha.service /etc/systemd/system/
    sudo systemctl daemon-reload
-   sudo systemctl enable raspberry_monitor_ha
-   sudo systemctl start raspberry_monitor_ha
+   sudo systemctl enable raspberry-monitor-ha
+   sudo systemctl start raspberry-monitor-ha
    ```
 
 ## Usage
