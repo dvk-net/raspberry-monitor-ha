@@ -1,7 +1,7 @@
 import json
 from loguru import logger
 from typing import Optional, Callable, Any
-from raspbery_monitor_ha.devices import device
+from raspberry_monitor_ha.devices import device
 
 class Sensor:
     def __init__(self, device, name, state_topic=None, config_topic=None, unit_of_measurement=None, device_class=None, icon=None):

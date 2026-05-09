@@ -7,9 +7,9 @@ Wants=network-online.target
 Type=simple
 User=your_username
 Group=your_username
-WorkingDirectory=/home/your_username/projects/raspbery-monitor-ha/raspbery_monitor_ha
+WorkingDirectory=/home/your_username/projects/raspberry-monitor-ha/raspberry_monitor_ha
 Environment="PATH=/home/denis/.local/bin:/usr/local/bin:/usr/bin:/bin"
-ExecStart=/home/your_username/.local/bin/poetry run python3 ./src/raspbery_monitor_ha/main.py
+ExecStart=/home/your_username/.local/bin/poetry run python3 ./src/raspberry_monitor_ha/main.py
 Restart=always
 RestartSec=10
 StandardOutput=journal

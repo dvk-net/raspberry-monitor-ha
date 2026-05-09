@@ -1,4 +1,4 @@
-from raspbery_monitor_ha import state_pollers, base_classes
+from raspberry_monitor_ha import state_pollers, base_classes
 
 configured_sensors = [
     base_classes.create_sensor(

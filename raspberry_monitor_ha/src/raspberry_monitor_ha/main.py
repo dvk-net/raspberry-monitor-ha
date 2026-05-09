@@ -4,10 +4,10 @@ import os
 from loguru import logger
 from dotenv import load_dotenv
 
-from raspbery_monitor_ha.client import MQTTclient
-from raspbery_monitor_ha.sensors import configured_sensors
-from raspbery_monitor_ha.buttons import configured_buttons
-from raspbery_monitor_ha.devices import device
+from raspberry_monitor_ha.client import MQTTclient
+from raspberry_monitor_ha.sensors import configured_sensors
+from raspberry_monitor_ha.buttons import configured_buttons
+from raspberry_monitor_ha.devices import device
 load_dotenv()
 
 BROKER = os.getenv("MQTT_HOST")
