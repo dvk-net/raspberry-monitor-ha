@@ -1,5 +1,4 @@
 import time
-import paho.mqtt.client as mqtt
 import os
 from loguru import logger
 from dotenv import load_dotenv
@@ -19,7 +18,6 @@ AVAIL_TOPIC = f"hmd/device/{DEVICE_ID}/status"
 logger.info("=======Starting monitoring=========")
 mqtt_client = MQTTclient().client
 
-# --- LWT (если процесс умер → offline)
 mqtt_client.will_set(
     AVAIL_TOPIC,
     payload="offline",

@@ -11,9 +11,9 @@ dependencies = [
     "pydantic (>=2.5.0)",
     "pydantic-settings (>=2.1.0)",
     "python-dotenv (>=1.0.0)",
-    "ha-mqtt-discoverable (>=0.24.2,<0.25.0)",
     "loguru (>=0.7.3,<0.8.0)",
-    "psutil (>=7.2.2,<8.0.0)"
+    "psutil (>=7.2.2,<8.0.0)",
+    "paho-mqtt (>=2.1.0,<3.0.0)"
 ]
 
 [tool.poetry]
